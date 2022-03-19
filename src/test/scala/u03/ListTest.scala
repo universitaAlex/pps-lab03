@@ -53,9 +53,16 @@ class ListTest:
     assertEquals(Cons("PPS", Cons("PCD", Nil())),mapPersonInCourses1(list))
     assertEquals(Nil(),mapPersonInCourses1(Cons(Student("Baiardi", 1),Nil())))
     assertEquals(Nil(),mapPersonInCourses1(Nil()))
-    
+
   @Test def testMapPersonInCourses2() =
     val list: List[Person] = Cons(Teacher("Viroli", "PPS"), Cons(Student("Baiardi", 1), Cons(Teacher("Ricci", "PCD"), Nil())))
     assertEquals(Cons("PPS", Cons("PCD", Nil())),mapPersonInCourses2(list))
     assertEquals(Nil(),mapPersonInCourses2(Cons(Student("Baiardi", 1),Nil())))
     assertEquals(Nil(),mapPersonInCourses2(Nil()))
+
+  @Test def testFold()=
+    val lst = Cons(3, Cons(7, Cons(1, Cons(5, Nil()))))
+    assertEquals(-16, foldLeft(lst)(0)(_ - _))
+    assertEquals(10, foldLeft(Nil[Double]())(10)((a: Int, b: Double) => (a - b).asInstanceOf[Int]))
+    assertEquals(-8, foldRight(lst)(0)(_ - _))
+    assertEquals(10, foldRight(Nil[Double]())(10)((a: Double, b: Int) => (a - b).asInstanceOf[Int]))

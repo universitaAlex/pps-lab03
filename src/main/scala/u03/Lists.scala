@@ -52,6 +52,14 @@ object Lists extends App :
       case Cons(h, t) => max(t)
       case _ => Option.empty
 
+    def foldLeft[A,B](l: List[A])(acc: B)(bop: (B, A) => B): B = l match
+      case Nil() => acc
+      case Cons(h, t) => foldLeft(t)(bop(acc, h))(bop)
+
+    def foldRight[A,B](l: List[A])(acc: B)(bop: (A, B) => B): B = l match
+      case Nil() => acc
+      case Cons(h, t) => bop(h,foldRight(t)(acc)(bop))
+
     import Person.*
 
     def mapPersonInCourses1(l:List[Person]):List[String]=
