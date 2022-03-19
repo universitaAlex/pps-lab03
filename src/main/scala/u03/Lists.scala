@@ -52,6 +52,13 @@ object Lists extends App :
       case Cons(h, t) => max(t)
       case _ => Option.empty
 
+    import Person.*
+
+    def mapPersonInCourses1(l:List[Person]):List[String]=
+      map(filter(l)(p=>p match {case Teacher(n,c) => true case _ => false }))(t=>t match {case Teacher(n,c)=>c})
+
+    def mapPersonInCourses2(l:List[Person]):List[String]=
+      flatMap(l)(p=> p match { case Teacher(n,c)=> Cons(c,Nil()) case _=> Nil()})
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
   println(List.sum(l)) // 60

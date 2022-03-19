@@ -7,6 +7,7 @@ import Lists.*
 class ListTest:
 
   import List.*
+  import Person.*
 
   val l: List[Int] = Cons(10, Cons(20, Cons(30, Nil())))
 
@@ -47,4 +48,14 @@ class ListTest:
     assertEquals(Some(25), max(Cons(10, Cons(25, Cons(20, Nil())))))
     assertEquals(None, max(Nil()))
 
-  @Test def testMapPersonInCourses()=
+  @Test def testMapPersonInCourses1() =
+    val list: List[Person] = Cons(Teacher("Viroli", "PPS"), Cons(Student("Baiardi", 1), Cons(Teacher("Ricci", "PCD"), Nil())))
+    assertEquals(Cons("PPS", Cons("PCD", Nil())),mapPersonInCourses1(list))
+    assertEquals(Nil(),mapPersonInCourses1(Cons(Student("Baiardi", 1),Nil())))
+    assertEquals(Nil(),mapPersonInCourses1(Nil()))
+    
+  @Test def testMapPersonInCourses2() =
+    val list: List[Person] = Cons(Teacher("Viroli", "PPS"), Cons(Student("Baiardi", 1), Cons(Teacher("Ricci", "PCD"), Nil())))
+    assertEquals(Cons("PPS", Cons("PCD", Nil())),mapPersonInCourses2(list))
+    assertEquals(Nil(),mapPersonInCourses2(Cons(Student("Baiardi", 1),Nil())))
+    assertEquals(Nil(),mapPersonInCourses2(Nil()))
